@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html>
+   <meta charset="utf-8"/>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
+   <title>Angularjs İlk Projem</title>
+    <div ng-app="ngUygulama" ng-controller="ngKontrol">
+      <ul>
+        <li><b>İşlem Statüsü:</b>{{jsonSebzeObj.status}}</li>
+        <li><b>Text Satüsü:</b>{{jsonSebzeObj.statusText}}</li>
+</ul>
+ </div>
+  <script type="text/javascript">
+    var uygulama=angular.module("ngUygulama",[]);
+    uygulama.controller("ngKontrol",function($scope, $http){
+      $http({method:"GET", url:"sebze.json"}).then(function (resp){
+        $scope.jsonSebzeObj=resp;
+        console.log($scope.jsonSebzeObj.data);
+      });
+    });
+    
+  
+  
+  
+  
+  </script>    
+    
+
+  
+  
+  </body>
+  
+    </html>
+    
+  

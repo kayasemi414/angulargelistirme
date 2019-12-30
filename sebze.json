@@ -1,0 +1,7 @@
+{
+    "sebzeler":[
+        {"isim":"Patates","kalori":77,"pro":2,"yag":0.1,"karb":17},
+        {"isim":"Domates","kalori":18,"pro":0.9,"yag":0.2,"karb":3.9},
+        {"isim":"Patlıcan","kalori":25,"pro":2,"yag":0.2,"karb":6}
+]
+}
