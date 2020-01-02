@@ -4,32 +4,37 @@
    <meta charset="utf-8"/>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
    <title>Angularjs İlk Projem</title>
-    <div ng-app="ngUygulama" ng-controller="ngKontrol">
-      <ul>
-        <li><b>İşlem Statüsü:</b>{{jsonSebzeObj.status}}</li>
-        <li><b>Text Satüsü:</b>{{jsonSebzeObj.statusText}}</li>
-</ul>
- </div>
-  <script type="text/javascript">
-    var uygulama=angular.module("ngUygulama",[]);
-    uygulama.controller("ngKontrol",function($scope, $http){
-      $http({method:"GET", url:"sebze.json"}).then(function (resp){
-        $scope.jsonSebzeObj=resp;
-        console.log($scope.jsonSebzeObj.data);
-      });
-    });
-    
-  
-  
-  
-  
-  </script>    
-    
-
-  
-  
-  </body>
-  
+  <head>
+    <style>
+    table th,td {border: 1px solid black;}
+  </style>
+  </head>
+   <div ng-app="ngUygulama" ng-controller="ngKontrol">
+  <tr>
+    <th>Sebze İsim</th>
+    <th>Kalori</th>
+    <th>Protein</th>
+    <th>Yağ</th>
+    <th>Karbonhidrat</th>
+  </tr>
+  <tr ng-repeat="sebze in jsonSebzeobj.data.sebzeler">
+    <td>{{sebze.isim}}</td>
+    <td>{{sebze.kalori}}</td>
+    <td>{{sebze.pro}} gram</td>
+    <td>{{sebze.yag}}gram</td>
+    <td>{{sebze.karb}}gram</td>
+</tr>
+   </div>
+   <script type="text/javascript">
+   var uygulama=angular.module("ngUygulama",[]);
+   uygulama.controller("ngKontrol",function($scope,$http){
+    $http({method:"GET", url:"sebze.json"}).then(function(resp){
+      $scope.jsonSebzeobj=resp;
+      console.log($scope.jsonSebzeobj.data);
+  });
+   });
+    </script>
+</body>
     </html>
     
   
