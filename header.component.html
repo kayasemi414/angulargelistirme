@@ -28,7 +28,7 @@
    <script type="text/javascript">
    var uygulama=angular.module("ngUygulama",[]);
    uygulama.controller("ngKontrol",function($scope,$http){
-    $http({method:"GET", url:"sebze.json"}).then(function(resp){
+    $http({method:"GET", url:"https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json"}).then(function(resp){
       $scope.jsonSebzeobj=resp;
       console.log($scope.jsonSebzeobj.data);
   });
