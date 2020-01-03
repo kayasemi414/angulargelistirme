@@ -3,37 +3,48 @@
 <html>
    <meta charset="utf-8"/>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
-   <title>Angularjs İlk Projem</title>
-  <head>
-    <style>
-    table th,td {border: 1px solid black;}
-  </style>
-  </head>
+   <title>Angularjs İlk Projem</title>  
+   <head>
+     <style>
+     table tr{border: cornsilk solid teal;}
+     </style>
+   </head>
    <div ng-app="ngUygulama" ng-controller="ngKontrol">
-  <tr>
-    <th>Sebze İsim</th>
-    <th>Kalori</th>
-    <th>Protein</th>
-    <th>Yağ</th>
-    <th>Karbonhidrat</th>
-  </tr>
-  <tr ng-repeat="sebze in jsonSebzeobj.data.sebzeler">
-    <td>{{sebze.isim}}</td>
-    <td>{{sebze.kalori}}</td>
-    <td>{{sebze.pro}} gram</td>
-    <td>{{sebze.yag}}gram</td>
-    <td>{{sebze.karb}}gram</td>
-</tr>
-   </div>
-   <script type="text/javascript">
-   var uygulama=angular.module("ngUygulama",[]);
-   uygulama.controller("ngKontrol",function($scope,$http){
-    $http({method:"GET", url:"https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json"}).then(function(resp){
-      $scope.jsonSebzeobj=resp;
-      //console.log($scope.jsonSebzeobj.data);
+    Kelimeye Göre Ara:<input ng-model="kelime"/><br>
+    <table>
+    <tr>
+      <th>Sebze Adı</th>
+      <th>Kalori</th>
+      <th>Protein</th>
+      <th>Yağ</th>
+      <th>Karbonhidrat</th>
+    </tr>
+    <tr ng-repeat="sebze in SebzeArray " $filter="kelime">
+      <td>{{sebze.isim}}</td>
+      <td>{{sebze.kalori}}</td>
+      <td>{{sebze.pro}}</td>
+      <td>{{sebze.yag}}</td>
+      <td>{{sebze.karb}}</td>
+    </tr>
+  </table>
+</div>
+<script type="text/javascript">
+  angular.module("ngUygulama",[]);
+  controller("ngKontrol",function($scope, $http){
+    $http.get("https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json").then(function(response){
+      $scope.SebzeArray=response.data.sebzeler;
+
+
+    });
+
+
+
   });
-   });
-    </script>
+
+
+
+
+</script>
 </body>
     </html>
     
