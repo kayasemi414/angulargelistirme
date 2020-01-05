@@ -4,47 +4,52 @@
    <meta charset="utf-8"/>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
    <title>Angularjs İlk Projem</title>  
-   <head>
-     <style>
-     table tr{border: cornsilk solid teal;}
-     </style>
-   </head>
    <div ng-app="ngUygulama" ng-controller="ngKontrol">
-    Kelimeye Göre Ara:<input ng-model="kelime"/><br>
-    <table>
-    <tr>
-      <th>Sebze Adı</th>
-      <th>Kalori</th>
-      <th>Protein</th>
-      <th>Yağ</th>
-      <th>Karbonhidrat</th>
-    </tr>
-    <tr ng-repeat="sebze in SebzeArray " $filter="kelime">
-      <td>{{sebze.isim}}</td>
-      <td>{{sebze.kalori}}</td>
-      <td>{{sebze.pro}}</td>
-      <td>{{sebze.yag}}</td>
-      <td>{{sebze.karb}}</td>
-    </tr>
+     Sıralama Ölçütü:
+     <select ng-change="siralamaDegistir()" ng-model="siralamaOlcut">
+      <option value="isim">İsime göre Alfabetik</option>
+      <option value="-isim">İsime göre Alfabe tersi</option>
+      <option value="kalori">kaloriye göre Sıralama</option>
+      <option value="-kalori">Kaloriye göre Albafenin tersi</option>
+      <option value="karb">Karbonhidrata göre Alfabetik</option>
+      <option value="-karb">Karbonhidrata göre Alfabe tersi</option>
+     </select>
+     <hr>
+     <table border="1" cellpadding="10" cellspacing="1">
+       <tr>
+        <th>Sebze Adı</th>
+        <th>Kalori</th>
+         <th>Protein</th> 
+        <th>Yağ</th>
+        <th>Karbonhidrat</th>
+       </tr>
+      
+       <tr ng-repeat="sebze in SebzelerArray">
+        <td>{{sebze.isim}}</td>
+        <td>{{sebze.kalori}}</td>
+        <td>{{sebze.pro}}</td>
+        <td>{{sebze.yag}}</td>
+        <td>{{sebze.karb}}</td>
+      </tr>
   </table>
-</div>
-<script type="text/javascript">
-  angular.module("ngUygulama",[]);
-  controller("ngKontrol",function($scope, $http){
-    $http.get("https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json").then(function(response){
-      $scope.SebzeArray=response.data.sebzeler;
+    </div>
+      <script type="text/javascript">
+      angular.module("ngUygulama",[]);
+      controller("ngKontrol",function($scope,$http,$filter){
+        $scope.siralamaOlcut="isim";
+        $http.get("https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json")
+        .then(function(response){
+          $scope.SebzelerArray=response.data.sebzeler;
+          $scope.siralamaDegistir();
+        });
+        $scope.siralamaDegistir=function(){
+        $scope.SebzelerArray=$filter("orderBy")($scope.SebzelerArray,$scope.siralamaOlcut);
+      };
+      });
+      
+      
+      </script>
 
-
-    });
-
-
-
-  });
-
-
-
-
-</script>
 </body>
     </html>
     
