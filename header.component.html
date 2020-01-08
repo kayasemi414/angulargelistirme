@@ -4,53 +4,48 @@
    <meta charset="utf-8"/>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
    <title>Angularjs İlk Projem</title>  
+ <body>
    <div ng-app="ngUygulama" ng-controller="ngKontrol">
-     Sıralama Ölçütü:
-     <select ng-change="siralamaDegistir()" ng-model="siralamaOlcut">
-      <option value="isim">İsime göre Alfabetik</option>
-      <option value="-isim">İsime göre Alfabe tersi</option>
-      <option value="kalori">kaloriye göre Sıralama</option>
-      <option value="-kalori">Kaloriye göre Albafenin tersi</option>
-      <option value="karb">Karbonhidrata göre Alfabetik</option>
-      <option value="-karb">Karbonhidrata göre Alfabe tersi</option>
-     </select>
-     <hr>
-     <table border="1" cellpadding="10" cellspacing="1">
-       <tr>
-        <th>Sebze Adı</th>
-        <th>Kalori</th>
-         <th>Protein</th> 
-        <th>Yağ</th>
-        <th>Karbonhidrat</th>
-       </tr>
-      
-       <tr ng-repeat="sebze in SebzelerArray">
-        <td>{{sebze.isim}}</td>
-        <td>{{sebze.kalori}}</td>
-        <td>{{sebze.pro}}</td>
-        <td>{{sebze.yag}}</td>
-        <td>{{sebze.karb}}</td>
-      </tr>
-  </table>
-    </div>
-      <script type="text/javascript">
-      angular.module("ngUygulama",[]);
-      controller("ngKontrol",function($scope,$http,$filter){
-        $scope.siralamaOlcut="isim";
-        $http.get("https://raw.githubusercontent.com/kayasemi414/angulargelistirme/master/sebze.json")
-        .then(function(response){
-          $scope.SebzelerArray=response.data.sebzeler;
-          $scope.siralamaDegistir();
-        });
-        $scope.siralamaDegistir=function(){
-        $scope.SebzelerArray=$filter("orderBy")($scope.SebzelerArray,$scope.siralamaOlcut);
-      };
+  <form name="form">
+    Adınız:<input type="text " ng-model="isim"><br>
+    Soyisim: <input type="text" ng-model="Soyisim"><br>
+    <input type="button" ng-click="gonder()" value="Gönder"></input>
+    {{durum}}
+  </form>
+</div>
+      <script>
+      var uygulama=angular.module("ngUygulama",[]);
+      uygulama.controller("ngKontrol",function($scope, $http){
+        $scope.durum="";
+
+        $scope.gonder=function(){
+          var obj={
+            isim:$scope.isim,
+            soyisim:$scope.soyisim
+          }
+            $http.post('http://site.com/api',obj).then(function(basariliresp){
+              $scope.isim="";
+              $scope.soyisim="";
+              $scope.durum="gönderildi";
+
+
+            });
+
+
+
+
+
+        }
+
+
+
+
       });
       
-      
       </script>
-
-</body>
+      
+      
+  </body>
     </html>
     
   
