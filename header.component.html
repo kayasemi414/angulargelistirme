@@ -23,13 +23,11 @@
             isim:$scope.isim,
             soyisim:$scope.soyisim
           }
-            $http.post('http://site.com/api',obj).then(function(basariliresp){
+            $http({method:"POST",url:"", data:obj }).then(function(resp){
               $scope.isim="";
               $scope.soyisim="";
               $scope.durum="gönderildi";
-
-
-            });
+            })
 
 
 
