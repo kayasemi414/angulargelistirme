@@ -28,7 +28,7 @@ uygulama.config(function($routeProvider,$locationProvider){
 var sayfalar=["hakkimizda,kurumsal,iletisim"];
   $routeProvider
       .when('/',{
-        templateUrl:'template/anasayfa.html'
+        templateUrl:'anasayfa.html'
 
       })
       .otherwise({redricedTo: '/'})
@@ -37,7 +37,7 @@ var sayfalar=["hakkimizda,kurumsal,iletisim"];
 });
 sayfalar.forEach(function(sayfa){
 $routeProvider.when('/'+sayfa,{
-  templateUrl:'template/'+sayfa+'.html'
+  templateUrl:'header'+sayfa+'.html'
 });
 
 
