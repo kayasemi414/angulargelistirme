@@ -3,13 +3,29 @@
 <html>
    <meta charset="utf-8"/>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.7.8/angular.min.js" integrity="sha256-23hi0Ag650tclABdGCdMNSjxvikytyQ44vYGo9HyOrU=" crossorigin="anonymous"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-animate.js"></script>
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular-route.js"></script>
+ 
+  
    <title>AngularJS</title>  
    <body>
      
    
  <div ng-app="ngUygulama" ng-controller="ngKontrol">
+  normal içerik
+  <hr>
+  <div sayfa></div>
+ </div>
+<script type="text/javascript">
+var uygulama=angular.module("ngUygulama",[]);
+uygulama.controller("ngKontrol",function($scope){
+  $scope.sayfabaslik="deneme";
+  $scope.sayfaicerik="efdsdlkfj lwekf ewlfkmew  ewf";
+});
+uygulama.directive('sayfa',function(){
+return{
+  templateUrl:'sayfa.html'
+};
+
+});
 
 
 </script>
